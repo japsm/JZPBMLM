@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Members - SUNX MLM Commission Engine</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f5f6fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .nav {
+            display: flex;
+            gap: 1rem;
+        }
+        .nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .nav a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        .nav a.active {
+            background: rgba(255,255,255,0.3);
+        }
+        .container {
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        /* Statistics Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
+        }
+        .stat-label {
+            color: #666;
+            margin-top: 0.5rem;
+        }
+        
+        /* Controls */
+        .controls {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .search-box {
+            flex: 1;
+            min-width: 200px;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        .filter-select {
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        .btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #5a6fd8;
+        }
+        .btn-success {
+            background: #28a745;
+        }
+        .btn-success:hover {
+            background: #218838;
+        }
+        
+        /* Members Table */
+        .members-table {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .table-responsive {
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+        th {
+            background: #f8f9fa;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: #333;
+            border-bottom: 2px solid #dee2e6;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            vertical-align: middle;
+        }
+        tr:hover {
+            background: #f8f9fa;
+        }
+        
+        /* Status badges */
+        .status {
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .status.active {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status.inactive {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        /* Level badges */
+        .level {
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .level.gold {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        .level.silver {
+            background: #e2e3e5;
+            color: #383d41;
+            border: 1px solid #d6d8db;
+        }
+        .level.bronze {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .level.reseller {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        
+        /* Hierarchy indentation */
+        .member-name {
+            padding-left: 0;
+        }
+        .hierarchy-1 { padding-left: 20px !important; }
+        .hierarchy-2 { padding-left: 40px !important; }
+        .hierarchy-3 { padding-left: 60px !important; }
+        .hierarchy-4 { padding-left: 80px !important; }
+        .hierarchy-5 { padding-left: 100px !important; }
+        
+        /* Currency formatting */
+        .currency {
+            font-weight: bold;
+            color: #28a745;
+        }
+        
+        /* Error message */
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            border: 1px solid #f5c6cb;
+        }
+        
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+        }
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Action buttons */
+        .action-btn {
+            padding: 0.3rem 0.8rem;
+            font-size: 0.8rem;
+            margin: 0 0.2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">🌞 SUNX MLM Members</div>
+        <nav class="nav">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/dashboard" class="nav-link">Dashboard</a>
+            <a href="/members" class="nav-link active">Members</a>
+            <a href="/commissions" class="nav-link">Commissions</a>
+            <a href="/reports" class="nav-link">Reports</a>
+        </nav>
+    </div>
+    
+    <div class="container">
+        <h1>Member Management</h1>
+        
+        <!-- Statistics Cards -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">👥</div>
+                <div class="stat-value">{{ stats.total_members }}</div>
+                <div class="stat-label">Total Members</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">✅</div>
+                <div class="stat-value">{{ stats.active_members }}</div>
+                <div class="stat-label">Active Members</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">⏸️</div>
+                <div class="stat-value">{{ stats.inactive_members }}</div>
+                <div class="stat-label">Inactive Members</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">💰</div>
+                <div class="stat-value">${{ "{:,.0f}".format(stats.total_sales) }}</div>
+                <div class="stat-label">Total Monthly Sales</div>
+            </div>
+        </div>
+        
+        {% if error %}
+        <div class="error-message">
+            <strong>⚠️ Error:</strong> {{ error }}
+        </div>
+        {% endif %}
+        
+        <!-- Search and Filter Controls -->
+        <div class="controls">
+            <input type="text" id="searchBox" class="search-box" placeholder="Search members by name, email, or ID..." onkeyup="filterTable()">
+            
+            <select id="statusFilter" class="filter-select" onchange="filterTable()">
+                <option value="">All Status</option>
+                <option value="Active">Active Only</option>
+                <option value="Inactive">Inactive Only</option>
+            </select>
+            
+            <select id="levelFilter" class="filter-select" onchange="filterTable()">
+                <option value="">All Levels</option>
+                <option value="Gold">Gold</option>
+                <option value="Silver">Silver</option>
+                <option value="Bronze">Bronze</option>
+                <option value="Reseller">Reseller</option>
+            </select>
+            
+            <button class="btn btn-success">➕ Add Member</button>
+            <button class="btn">📤 Export</button>
+        </div>
+        
+        <!-- Members Table -->
+        {% if members %}
+        <div class="members-table">
+            <div class="table-responsive">
+                <table id="membersTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Level</th>
+                            <th>Sponsor</th>
+                            <th>Join Date</th>
+                            <th>Monthly Sales</th>
+                            <th>Downline</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for member in members %}
+                        <tr data-status="{{ member.status }}" data-level="{{ member.level }}">
+                            <td>{{ member.id }}</td>
+                            <td class="member-name hierarchy-{{ member.hierarchy_level if member.hierarchy_level <= 5 else 5 }}">
+                                {% if member.hierarchy_level > 0 %}
+                                    <span style="color: #999;">{{ "└─ " if member.hierarchy_level == 1 else "  " * (member.hierarchy_level - 1) + "└─ " }}</span>
+                                {% endif %}
+                                <strong>{{ member.name }}</strong>
+                            </td>
+                            <td>{{ member.email }}</td>
+                            <td>
+                                <span class="level {{ member.level.lower() }}">{{ member.level }}</span>
+                            </td>
+                            <td>{{ member.sponsor }}</td>
+                            <td>{{ member.join_date }}</td>
+                            <td class="currency">${{ "{:,.0f}".format(member.monthly_sales) }}</td>
+                            <td>{{ member.downline_count }}</td>
+                            <td>
+                                <span class="status {{ member.status.lower() }}">{{ member.status }}</span>
+                            </td>
+                            <td>
+                                <button class="btn action-btn">👁️ View</button>
+                                <button class="btn action-btn">✏️ Edit</button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <div class="empty-state-icon">👥</div>
+            <h3>No Members Found</h3>
+            <p>There are no members in the system yet, or there was an error loading the data.</p>
+            <button class="btn btn-success">➕ Add First Member</button>
+        </div>
+        {% endif %}
+        
+        <p style="margin-top: 2rem; color: #666;">
+            💡 <strong>Note:</strong> Member hierarchy is shown with indentation. Sales figures are current month totals.
+        </p>
+    </div>
+
+    <script>
+        function filterTable() {
+            const searchBox = document.getElementById('searchBox');
+            const statusFilter = document.getElementById('statusFilter');
+            const levelFilter = document.getElementById('levelFilter');
+            const table = document.getElementById('membersTable');
+            const rows = table.getElementsByTagName('tr');
+            
+            const searchTerm = searchBox.value.toLowerCase();
+            const statusValue = statusFilter.value;
+            const levelValue = levelFilter.value;
+            
+            // Skip header row (index 0)
+            for (let i = 1; i < rows.length; i++) {
+                const row = rows[i];
+                const cells = row.getElementsByTagName('td');
+                
+                if (cells.length === 0) continue;
+                
+                const id = cells[0].textContent.toLowerCase();
+                const name = cells[1].textContent.toLowerCase();
+                const email = cells[2].textContent.toLowerCase();
+                const level = cells[3].textContent.trim();
+                const sponsor = cells[4].textContent.toLowerCase();
+                const status = row.getAttribute('data-status');
+                const memberLevel = row.getAttribute('data-level');
+                
+                // Check search term
+                const matchesSearch = searchTerm === '' || 
+                    id.includes(searchTerm) ||
+                    name.includes(searchTerm) ||
+                    email.includes(searchTerm) ||
+                    sponsor.includes(searchTerm);
+                
+                // Check status filter
+                const matchesStatus = statusValue === '' || status === statusValue;
+                
+                // Check level filter
+                const matchesLevel = levelValue === '' || memberLevel === levelValue;
+                
+                // Show/hide row based on all filters
+                if (matchesSearch && matchesStatus && matchesLevel) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            }
+        }
+        
+        // Real-time search
+        document.getElementById('searchBox').addEventListener('input', filterTable);
+        
+        // Initialize table on load
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Members page loaded with {{ members|length }} members');
+        });
+    </script>
+</body>
+</html>

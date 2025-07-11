@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commissions - SUNX MLM Commission Engine</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f5f6fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .nav {
+            display: flex;
+            gap: 1rem;
+        }
+        .nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .nav a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        .nav a.active {
+            background: rgba(255,255,255,0.3);
+        }
+        .container {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .commission-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .summary-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .summary-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .summary-amount {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #333;
+        }
+        .summary-label {
+            color: #666;
+            margin-top: 0.5rem;
+        }
+        .filters {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+        .filter-group label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .filter-input {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .commissions-table {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th {
+            background: #f8f9fa;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: #333;
+        }
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        tr:hover {
+            background: #f8f9fa;
+        }
+        .amount {
+            font-weight: bold;
+            color: #27ae60;
+        }
+        .commission-type {
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        .type-direct {
+            background: #e8f5e8;
+            color: #2d5a2d;
+        }
+        .type-level {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+        .type-bonus {
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">🌞 SUNX MLM Commissions</div>
+        <nav class="nav">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/dashboard" class="nav-link">Dashboard</a>
+            <a href="/members" class="nav-link">Members</a>
+            <a href="/commissions" class="nav-link active">Commissions</a>
+            <a href="/reports" class="nav-link">Reports</a>
+        </nav>
+    </div>
+    
+    <div class="container">
+        <h1>Commission Tracking</h1>
+        
+        <div class="commission-summary">
+            <div class="summary-card">
+                <div class="summary-icon">💰</div>
+                <div class="summary-amount">$12,450</div>
+                <div class="summary-label">Total This Month</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-icon">📈</div>
+                <div class="summary-amount">$3,280</div>
+                <div class="summary-label">Direct Sales</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-icon">🏆</div>
+                <div class="summary-amount">$8,420</div>
+                <div class="summary-label">Level Commissions</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-icon">🎯</div>
+                <div class="summary-amount">$750</div>
+                <div class="summary-label">Bonuses</div>
+            </div>
+        </div>
+        
+        <div class="filters">
+            <div class="filter-group">
+                <label>Date Range</label>
+                <input type="date" class="filter-input">
+            </div>
+            <div class="filter-group">
+                <label>To</label>
+                <input type="date" class="filter-input">
+            </div>
+            <div class="filter-group">
+                <label>Member</label>
+                <select class="filter-input">
+                    <option>All Members</option>
+                    <option>John Smith</option>
+                    <option>Sarah Johnson</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Type</label>
+                <select class="filter-input">
+                    <option>All Types</option>
+                    <option>Direct Sales</option>
+                    <option>Level Commission</option>
+                    <option>Bonus</option>
+                </select>
+            </div>
+            <button class="btn">🔍 Filter</button>
+        </div>
+        
+        <div class="commissions-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Member</th>
+                        <th>Type</th>
+                        <th>Level</th>
+                        <th>Sale Amount</th>
+                        <th>Commission %</th>
+                        <th>Commission Amount</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2025-07-07</td>
+                        <td>John Smith</td>
+                        <td><span class="commission-type type-direct">Direct Sale</span></td>
+                        <td>-</td>
+                        <td>$500.00</td>
+                        <td>15%</td>
+                        <td class="amount">$75.00</td>
+                        <td>✅ Paid</td>
+                    </tr>
+                    <tr>
+                        <td>2025-07-07</td>
+                        <td>Sarah Johnson</td>
+                        <td><span class="commission-type type-level">Level 2</span></td>
+                        <td>2</td>
+                        <td>$800.00</td>
+                        <td>8%</td>
+                        <td class="amount">$64.00</td>
+                        <td>⏳ Pending</td>
+                    </tr>
+                    <tr>
+                        <td>2025-07-06</td>
+                        <td>Mike Davis</td>
+                        <td><span class="commission-type type-bonus">Monthly Bonus</span></td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td class="amount">$250.00</td>
+                        <td>✅ Paid</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <p style="margin-top: 2rem; color: #666;">
+            💡 <strong>Note:</strong> Commission calculations are processed automatically based on your MLM plan structure.
+        </p>
+    </div>
+</body>
+</html>

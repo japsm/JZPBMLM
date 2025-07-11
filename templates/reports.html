@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - SUNX MLM Commission Engine</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f5f6fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .nav {
+            display: flex;
+            gap: 1rem;
+        }
+        .nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .nav a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        .nav a.active {
+            background: rgba(255,255,255,0.3);
+        }
+        .container {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .reports-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .report-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 4px solid #667eea;
+        }
+        .report-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .report-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        .report-description {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        .report-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.6rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: inline-block;
+        }
+        .btn:hover {
+            background: #5a6fd8;
+        }
+        .btn-secondary {
+            background: #6c757d;
+        }
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        .quick-stats {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+        }
+        .export-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .export-controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        .export-controls select,
+        .export-controls input {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">🌞 SUNX MLM Reports</div>
+        <nav class="nav">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/dashboard" class="nav-link">Dashboard</a>
+            <a href="/members" class="nav-link">Members</a>
+            <a href="/commissions" class="nav-link">Commissions</a>
+            <a href="/reports" class="nav-link active">Reports</a>
+        </nav>
+    </div>
+    
+    <div class="container">
+        <h1>Reports & Analytics</h1>
+        
+        <div class="quick-stats">
+            <h2>📊 Quick Statistics</h2>
+            <div class="stats-row">
+                <div class="stat-item">
+                    <div class="stat-value">1,247</div>
+                    <div class="stat-label">Total Members</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">$45,230</div>
+                    <div class="stat-label">Total Sales (YTD)</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">$12,450</div>
+                    <div class="stat-label">Commissions Paid</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">89</div>
+                    <div class="stat-label">Active This Month</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="reports-grid">
+            <div class="report-card">
+                <div class="report-icon">📈</div>
+                <div class="report-title">Sales Performance Report</div>
+                <div class="report-description">
+                    Detailed analysis of sales performance by member, level, and time period. Includes trends and growth metrics.
+                </div>
+                <div class="report-actions">
+                    <button class="btn">📄 Generate</button>
+                    <button class="btn btn-secondary">📅 Schedule</button>
+                </div>
+            </div>
+            
+            <div class="report-card">
+                <div class="report-icon">💰</div>
+                <div class="report-title">Commission Summary</div>
+                <div class="report-description">
+                    Complete breakdown of all commission payments, pending amounts, and commission structure analysis.
+                </div>
+                <div class="report-actions">
+                    <button class="btn">📄 Generate</button>
+                    <button class="btn btn-secondary">📅 Schedule</button>
+                </div>
+            </div>
+            
+            <div class="report-card">
+                <div class="report-icon">👥</div>
+                <div class="report-title">Member Activity Report</div>
+                <div class="report-description">
+                    Track member engagement, activity levels, recruitment performance, and retention statistics.
+                </div>
+                <div class="report-actions">
+                    <button class="btn">📄 Generate</button>
+                    <button class="btn btn-secondary">📅 Schedule</button>
+                </div>
+            </div>
+            
+            <div class="report-card">
+                <div class="report-icon">🌳</div>
+                <div class="report-title">Downline Structure</div>
+                <div class="report-description">
+                    Visual representation of your MLM structure, genealogy reports, and network depth analysis.
+                </div>
+                <div class="report-actions">
+                    <button class="btn">📄 Generate</button>
+                    <button class="btn btn-secondary">📅 Schedule</button>
+                </div>
+            </div>
+            
+            <div class="report-card">
+                <div class="report-icon">📊</div>
+                <div class="report-title">Financial Summary</div>
+                <div class="report-description">
+                    Comprehensive financial reports including revenue, expenses, profit margins, and tax summaries.
+                </div>
+                <div class="report-actions">
+                    <button class="btn">📄 Generate</button>
+                    <button class="btn btn-secondary">📅 Schedule</button>
+                </div>
+            </div>
+            
+            <div class="report-card">
+                <div class="report-icon">🎯</div>
+                <div class="report-title">Goal Tracking</div>
+                <div class="report-description">
+                    Monitor progress towards sales targets, recruitment goals, and performance benchmarks.
+                </div>
+                <div class="report-actions">
+                    <button class="btn">📄 Generate</button>
+                    <button class="btn btn-secondary">📅 Schedule</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="export-section">
+            <h2>📤 Export Data</h2>
+            <p>Export your data in various formats for external analysis or record keeping.</p>
+            <div class="export-controls">
+                <select>
+                    <option>Select Report Type</option>
+                    <option>All Member Data</option>
+                    <option>Commission Records</option>
+                    <option>Sales Data</option>
+                    <option>Financial Summary</option>
+                </select>
+                <input type="date" placeholder="From Date">
+                <input type="date" placeholder="To Date">
+                <select>
+                    <option>Format: Excel</option>
+                    <option>Format: CSV</option>
+                    <option>Format: PDF</option>
+                </select>
+                <button class="btn">📥 Export</button>
+            </div>
+        </div>
+        
+        <p style="margin-top: 2rem; color: #666;">
+            💡 <strong>Note:</strong> All reports can be customized with date ranges, filters, and specific criteria. Scheduled reports will be emailed automatically.
+        </p>
+    </div>
+</body>
+</html>
